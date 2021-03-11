@@ -5,3 +5,8 @@ TODO_list/__pycache__/
 db.sqlite3
 infosite.txt
 
+TODO_list/__pycache__/
+listapp/__pycache__/
+listapp/migrations/0001_initial.py
+listapp/migrations/__pycache__/
+
