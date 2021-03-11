@@ -1,5 +1,7 @@
 venv
 .idea/
 TODO_list/__pycache__/
+*/__pycache__/
 db.sqlite3
 infosite.txt
+
