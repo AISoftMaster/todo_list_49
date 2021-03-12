@@ -13,7 +13,7 @@ class Status(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=350)
 
-    description = models.CharField(max_length=350, null=True, blank=True)
+    description = models.CharField(max_length=2048, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     upgreate = models.DateTimeField(auto_now=True)
 
@@ -23,8 +23,4 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
-# class Treker(models.Model):
-#     title = models.CharField(max_length=350)
 
-#     status = models.ForeignKey(on_delete=Protect)
-#     [type = models.CharField()
