@@ -3,6 +3,7 @@ from django.db import models
 
 class Type(models.Model):
     name = models.CharField(max_length=350)
+
     def __str__(self):
         return self.name
 
@@ -32,7 +33,7 @@ class Task(models.Model):
     upgreate = models.DateTimeField(auto_now=True)
 
     # type = models.ForeignKey('listapp.Type', on_delete=models.PROTECT, related_name="tasks")
-    type = models.ManyToManyField('listapp.Type', through='listapp.TaskType', through_fields=('task', 'type'), related_name="tasks")
+    type = models.ManyToManyField('listapp.Type', through='listapp.TaskType', through_fields=('task', 'type'), related_name="tasks", blank=True)
     status = models.ForeignKey('listapp.Status', on_delete=models.PROTECT, related_name="status")
 
     def __str__(self):

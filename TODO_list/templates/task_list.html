@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+Task List
+{% endblock title %}
+{% block content %}
+<h1>Tasks</h1>
+<ul>
+{% for task in tasks %}
+    <li>{{ task.created.|date }} - {{ task.upgreate }}</li>
+    <li>{{ task.title}}</li>
+{% empty %}
+    <li>No tasks yet.</li>
+{% endfor %}
+</ul>
+{% endblock content %}
