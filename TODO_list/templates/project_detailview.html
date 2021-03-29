@@ -8,7 +8,7 @@ Projects -
 <ul>
 {% for task in project.task_project.all %}
     <li>{{ task.created|date }} - {{ task.finished }}</li>
-   <li><a href="{% url 'task_list' project.pk %}">{{ task.title}}</a></li>
+   <li><a href="{% url 'task_detail' project.pk task.pk %}">{{ task.title}}</a></li>
 {% empty %}
     <li>No project yet.</li>
 {% endfor %}

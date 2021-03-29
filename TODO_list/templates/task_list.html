@@ -3,9 +3,11 @@
 Task List
 {% endblock title %}
 {% block content %}
+{{tasks.project}}
 <h1>Tasks</h1>
 <ul>
 {% for task in tasks %}
+    {{tasks.project}}
     <li>{{ task.created.|date }} - {{ task.upgreate }}</li>
     <li>{{ task.title}}</li>
     <li>{{ task.project }}</li>

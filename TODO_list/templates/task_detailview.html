@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}
+Projects -
+{% endblock title %}
+{% block content %}
+<h1>task detail view html</h1>
+{{task.project}}
+<br>
+{{task.title}}
+<ul>
+
+    <li>{{ task.type}}</li>
+    <li>{{task.description}}</li>
+    <li>{{task.status}}</li>
+    <li>{{task.type}}</li>
+    <li>{{ task.created }}</li>
+    <li>{{task.upgreate}}</li>
+
+</ul>
+
+{% endblock content %}

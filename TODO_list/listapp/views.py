@@ -22,6 +22,13 @@ class TaskListview(ListView):
     paginate_by = 10
 
 
+class TaskDetailView(DetailView):
+    model = Task
+    context_object_name = "task"
+    template_name = "task_detailview.html"
+    pk_url_kwarg = "pk2"
+
+
 class ProjectListview(ListView):
     template_name = "project_listview.html"
     context_object_name = "projects"
@@ -64,7 +71,6 @@ class TaskCreate(CreateView):
         #     TaskType.objects.create(task=task, type=Type.objects.get(pk=int(t)))
 
         return redirect('project_detailview', pk=project.pk)
-
 
 
 
