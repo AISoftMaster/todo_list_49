@@ -8,6 +8,7 @@ Task List
 {% for task in tasks %}
     <li>{{ task.created.|date }} - {{ task.upgreate }}</li>
     <li>{{ task.title}}</li>
+    <li>{{ task.project }}</li>
 {% empty %}
     <li>No tasks yet.</li>
 {% endfor %}

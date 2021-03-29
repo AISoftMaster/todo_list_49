@@ -10,3 +10,6 @@ listapp/__pycache__/
 listapp/migrations/0001_initial.py
 listapp/migrations/__pycache__/
 
+TODO_list/TODO_list/__pycache__/
+TODO_list/listapp/__pycache__/
+TODO_list/listapp/migrations/

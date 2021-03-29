@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+Projects -
+{% endblock title %}
+{% block content %}
+<h1>project detail view html</h1>
+{{project.name}}
+<ul>
+{% for task in project.task_project.all %}
+    <li>{{ task.created|date }} - {{ task.finished }}</li>
+   <li><a href="{% url 'task_list' project.pk %}">{{ task.title}}</a></li>
+{% empty %}
+    <li>No project yet.</li>
+{% endfor %}
+</ul>
+
+<h2><a href="{% url 'task_create' project.pk %}">task_create</a></h2>
+{% endblock content %}
