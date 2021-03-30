@@ -16,15 +16,6 @@ class Status(models.Model):
 # Create your models here.
 
 
-# class TaskType(models.Model):
-#     task = models.ForeignKey('listapp.Task', related_name="task_types", on_delete=models.CASCADE, verbose_name='Задача')
-#
-#     type = models.ForeignKey('listapp.Type', related_name="type_tasks", on_delete=models.CASCADE, verbose_name='Тэг')
-#
-#     def __str__(self):
-#         return "{} | {}".format(self.task, self.type)
-
-
 class Project(models.Model):
     created = models.DateTimeField()
     finished = models.DateTimeField(null=True, blank=True)

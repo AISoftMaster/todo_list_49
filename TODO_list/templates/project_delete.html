@@ -6,7 +6,6 @@ Tasks -
 
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
     <h1>Are you sure to want to delete?</h1>
     <h2>{{project.name}}</h2>
     <br>

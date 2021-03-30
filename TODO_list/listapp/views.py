@@ -79,9 +79,34 @@ class ProjectUpdateView(UpdateView):
         return reverse('project_detailview', kwargs={'pk': self.object.pk})
 
 
+class TaskUpdateView(UpdateView):
+    model = Task
+    template_name = 'project_form.html'
+    form_class = TaskForm
+    context_object_name = 'task'
+    pk_url_kwarg = 'pk2'
+
+    def get_success_url(self):
+        return reverse('task_detail', kwargs={'pk': self.object.project.pk, 'pk2': self.object.pk})
+
+
 class ProjectDeleteView(DeleteView):
     model = Project
     template_name = 'project_delete.html'
-
     context_object_name = 'project'
     success_url = reverse_lazy('project_listview')
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    # template_name = 'task_delete.html'
+    # context_object_name = 'task'
+    pk_url_kwarg = 'pk2'
+
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('project_detailview', kwargs={'pk': self.object.project.pk})
+
