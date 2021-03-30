@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 from .forms import ProjectForm, TaskForm
@@ -66,12 +66,22 @@ class TaskCreate(CreateView):
         task.save()
         form.save_m2m()
 
-
-        # for t in self.request.POST.get("type"):
-        #     TaskType.objects.create(task=task, type=Type.objects.get(pk=int(t)))
-
         return redirect('project_detailview', pk=project.pk)
 
 
+class ProjectUpdateView(UpdateView):
+    model = Project
+    template_name = 'project_form.html'
+    form_class = ProjectForm
+    context_key = 'project'
+
+    def get_success_url(self):
+        return reverse('project_detailview', kwargs={'pk': self.object.pk})
 
 
+class ProjectDeleteView(DeleteView):
+    model = Project
+    template_name = 'project_delete.html'
+
+    context_object_name = 'project'
+    success_url = reverse_lazy('project_listview')
