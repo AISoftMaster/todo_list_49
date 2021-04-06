@@ -24,7 +24,7 @@
   "model": "listapp.project",
   "pk": 1,
   "fields": {
-    "created": "2020-02-01T00:00:00Z",
+    "created": "2020-02-01T00:00:00",
     "finished": null,
     "name": "first Project",
     "description": "rrrrrrrr"
@@ -34,8 +34,8 @@
   "model": "listapp.project",
   "pk": 2,
   "fields": {
-    "created": "2020-01-21T00:00:00Z",
-    "finished": "2020-03-02T00:00:00Z",
+    "created": "2020-01-21T00:00:00",
+    "finished": "2020-03-02T00:00:00",
     "name": "super_project",
     "description": "dfsg"
   }
@@ -44,8 +44,8 @@
   "model": "listapp.project",
   "pk": 3,
   "fields": {
-    "created": "2000-12-02T00:00:00Z",
-    "finished": "2020-12-05T00:00:00Z",
+    "created": "2000-12-02T00:00:00",
+    "finished": "2020-12-05T00:00:00",
     "name": "project12",
     "description": "sl;adkjf"
   }
@@ -54,9 +54,9 @@
   "model": "listapp.project",
   "pk": 12,
   "fields": {
-    "created": "2000-12-02T00:00:00Z",
-    "finished": "2020-03-02T00:00:00Z",
-    "name": "dsaf",
+    "created": null,
+    "finished": null,
+    "name": "green energy",
     "description": "asdf"
   }
 },
@@ -64,10 +64,20 @@
   "model": "listapp.project",
   "pk": 13,
   "fields": {
-    "created": "2020-02-01T00:00:00Z",
-    "finished": "2020-02-03T00:00:00Z",
+    "created": "2020-02-01T00:00:00",
+    "finished": "2020-02-03T00:00:00",
     "name": "biggest project",
     "description": "asdf dasdf asd f"
+  }
+},
+{
+  "model": "listapp.project",
+  "pk": 15,
+  "fields": {
+    "created": null,
+    "finished": null,
+    "name": "asdf",
+    "description": "asdf"
   }
 },
 {
@@ -162,11 +172,99 @@
   }
 },
 {
+  "model": "listapp.task",
+  "pk": 12,
+  "fields": {
+    "title": "asdf",
+    "description": "asdf",
+    "created": "2021-04-02T09:28:47.390Z",
+    "upgreate": "2021-04-02T09:28:47.390Z",
+    "status": 1,
+    "project": 15,
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "listapp.task",
+  "pk": 13,
+  "fields": {
+    "title": "sfdg",
+    "description": "sdfg",
+    "created": "2021-04-02T10:23:45.160Z",
+    "upgreate": "2021-04-02T10:23:45.160Z",
+    "status": 1,
+    "project": 1,
+    "type": []
+  }
+},
+{
+  "model": "listapp.task",
+  "pk": 14,
+  "fields": {
+    "title": "sdfg",
+    "description": "adfg",
+    "created": "2021-04-02T10:23:53.028Z",
+    "upgreate": "2021-04-02T10:23:53.028Z",
+    "status": 1,
+    "project": 1,
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "listapp.task",
+  "pk": 15,
+  "fields": {
+    "title": "asdf",
+    "description": "wef",
+    "created": "2021-04-02T10:25:20.868Z",
+    "upgreate": "2021-04-02T10:25:20.868Z",
+    "status": 1,
+    "project": 1,
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "listapp.task",
+  "pk": 16,
+  "fields": {
+    "title": "asdf",
+    "description": "we",
+    "created": "2021-04-02T10:25:29.478Z",
+    "upgreate": "2021-04-02T10:25:29.478Z",
+    "status": 1,
+    "project": 1,
+    "type": [
+      1
+    ]
+  }
+},
+{
+  "model": "listapp.task",
+  "pk": 17,
+  "fields": {
+    "title": "asdfasdfsdf",
+    "description": "asdf",
+    "created": "2021-04-02T11:41:17.115Z",
+    "upgreate": "2021-04-02T11:41:17.115Z",
+    "status": 1,
+    "project": 12,
+    "type": [
+      2
+    ]
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$bvCWgIJ61Qfj$+cvX1Y1quHNXzGfxqEH0Zkqi5BE9/dhkq2iEzzp/1dU=",
-    "last_login": "2021-03-29T11:09:17.941Z",
+    "last_login": "2021-04-06T09:39:15.528Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
