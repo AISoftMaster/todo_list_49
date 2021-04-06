@@ -4,10 +4,11 @@ Tasks -
 {% endblock title %}
 {% block content %}
 
-<form method="POST">
+<form method="post">
     {% csrf_token %}
+    {{ product.name }}
     <h1>Are you sure to want to delete?</h1>
-    <h2>{{project.name}}</h2>
+
     <br>
     <input type="submit" value="Delete">
 </form>

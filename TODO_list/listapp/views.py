@@ -19,7 +19,7 @@ class TaskListview(ListView):
     template_name = "task_list.html"
     context_object_name = "tasks"
     model = Task
-    paginate_by = 10
+    paginate_by = 5
 
 
 class TaskDetailView(DetailView):
@@ -33,7 +33,7 @@ class ProjectListview(ListView):
     template_name = "project_listview.html"
     context_object_name = "projects"
     model = Project
-    paginate_by = 10
+    paginate_by = 5
 
 
 class ProjectsDetailView(DetailView):
@@ -102,7 +102,6 @@ class TaskDeleteView(DeleteView):
     # template_name = 'task_delete.html'
     # context_object_name = 'task'
     pk_url_kwarg = 'pk2'
-
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)

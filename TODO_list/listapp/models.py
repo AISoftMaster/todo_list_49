@@ -17,8 +17,8 @@ class Status(models.Model):
 
 
 class Project(models.Model):
-    created = models.DateTimeField()
-    finished = models.DateTimeField(null=True, blank=True)
+    created = models.DateField()
+    finished = models.DateField(null=True, blank=True)
     name = models.CharField(max_length=60)
     description = models.CharField(max_length=250)
 

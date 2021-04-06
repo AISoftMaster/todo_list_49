@@ -14,4 +14,7 @@ Projects -
 </ul>
 
 <h2><a href="{% url 'project_create' %}">Project_create</a></h2>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock content %}
