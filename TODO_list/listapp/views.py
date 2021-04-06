@@ -11,6 +11,8 @@ from .models import Task, Project, Type
 # Create your views here.
 
 
+
+
 def index(request):
     return render(request, "index.html")
 
@@ -52,6 +54,10 @@ class ProjectCreate(CreateView):
         project.save()
         return redirect('project_listview')
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        return super().dispatch(request, *args, **kwargs)
 
 class TaskCreate(CreateView):
     template_name = "project_form.html"
