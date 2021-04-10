@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+Projects -
+{% endblock title %}
+{% block content %}
+    <h1>List view</h1>
+<ul>
+{% for project in projects %}
+    <li>{{ project.created|date }} - {{ project.finished }}</li>
+   <li><a href="{% url 'project:detailview' project.pk %}">{{ project.name}}</a></li>
+{% empty %}
+    <li>No project yet.</li>
+{% endfor %}
+</ul>
+
+<h2><a href="{% url 'project:create' %}">Project_create</a></h2>
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock content %}

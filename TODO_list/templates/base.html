@@ -1,8 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'paginate.css' %}" >
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>
         {% block title %}
 
@@ -10,6 +13,24 @@
         Todo List</title>
 </head>
 <body>
+<nav class="navbar">
+   <ul class="menu">
+       <li><a href="{% url 'project:listview' %}">На главную</a></li>
+       {% if request.user.is_authenticated %}
+           {% block menu_links %}{% endblock %}
+           <li class="menu-right"><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}"
+                                     class="nav-link">Выход</a></li>
+           <li class="menu-right">Привет, {{ user.username }}!</li>
+       {% else %}
+           <li class="menu-right">
+               <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}"
+                                     class="nav-link">Вход</a>
+           </li>
+            <li class="menu-right"><a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}"
+            class="nav-link">Регистрация</a></li>
+       {% endif %}
+   </ul>
+</nav>
 <div class="container">
 
     {% block content %}

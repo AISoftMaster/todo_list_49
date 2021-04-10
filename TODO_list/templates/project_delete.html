@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}
+Tasks -
+{% endblock title %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ product.name }}
+    <h1>Are you sure to want to delete?</h1>
+
+    <br>
+    <input type="submit" value="Delete">
+</form>
+
+{% endblock content %}
