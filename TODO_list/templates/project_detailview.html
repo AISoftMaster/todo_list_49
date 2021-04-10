@@ -8,14 +8,14 @@ Projects -
 <ul>
 {% for task in project.task_project.all %}
     <li>{{ task.created|date }} - {{ task.finished }}</li>
-   <li><a href="{% url 'task_detail' project.pk task.pk %}">{{ task.title}}</a></li>
+   <li><a href="{% url 'project:detail' project.pk task.pk %}">{{ task.title}}</a></li>
 {% empty %}
     <li>No task yet.</li>
 {% endfor %}
 </ul>
 
-<h3><a href="{% url 'task_create' project.pk %}">Task create</a></h3>
-<h3><a href="{% url 'project_update' project.pk %}">Project update</a></h3>
-<h3><a href="{% url 'project_delete' project.pk %}">Project delete</a></h3>
+<h3><a href="{% url 'project:create' project.pk %}">Task create</a></h3>
+<h3><a href="{% url 'project:update' project.pk %}">Project update</a></h3>
+<h3><a href="{% url 'project:delete' project.pk %}">Project delete</a></h3>
 
 {% endblock content %}

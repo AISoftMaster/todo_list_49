@@ -7,13 +7,13 @@ Projects -
 <ul>
 {% for project in projects %}
     <li>{{ project.created|date }} - {{ project.finished }}</li>
-   <li><a href="{% url 'project_detailview' project.pk %}">{{ project.name}}</a></li>
+   <li><a href="{% url 'project:detailview' project.pk %}">{{ project.name}}</a></li>
 {% empty %}
     <li>No project yet.</li>
 {% endfor %}
 </ul>
 
-<h2><a href="{% url 'project_create' %}">Project_create</a></h2>
+<h2><a href="{% url 'project:create' %}">Project_create</a></h2>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}

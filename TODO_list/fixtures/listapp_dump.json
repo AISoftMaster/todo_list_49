@@ -22,16 +22,6 @@
 },
 {
   "model": "listapp.project",
-  "pk": 1,
-  "fields": {
-    "created": "2020-02-01T00:00:00",
-    "finished": null,
-    "name": "first Project",
-    "description": "rrrrrrrr"
-  }
-},
-{
-  "model": "listapp.project",
   "pk": 2,
   "fields": {
     "created": "2020-01-21T00:00:00",
@@ -64,51 +54,40 @@
   "model": "listapp.project",
   "pk": 13,
   "fields": {
-    "created": "2020-02-01T00:00:00",
-    "finished": "2020-02-03T00:00:00",
+    "created": null,
+    "finished": null,
     "name": "biggest project",
     "description": "asdf dasdf asd f"
   }
 },
 {
   "model": "listapp.project",
-  "pk": 15,
+  "pk": 16,
   "fields": {
     "created": null,
     "finished": null,
-    "name": "asdf",
-    "description": "asdf"
+    "name": "sdfg",
+    "description": "sfdg"
   }
 },
 {
-  "model": "listapp.task",
-  "pk": 1,
+  "model": "listapp.project",
+  "pk": 17,
   "fields": {
-    "title": "sssssss",
-    "description": "ssssssssss",
-    "created": "2021-03-29T09:54:05.668Z",
-    "upgreate": "2021-03-29T09:54:05.668Z",
-    "status": 1,
-    "project": 1,
-    "type": [
-      1,
-      2
-    ]
+    "created": null,
+    "finished": null,
+    "name": "rsdg",
+    "description": "sdfg"
   }
 },
 {
-  "model": "listapp.task",
-  "pk": 2,
+  "model": "listapp.project",
+  "pk": 18,
   "fields": {
-    "title": "supertask",
-    "description": "ddfdfd",
-    "created": "2021-03-29T09:58:28.744Z",
-    "upgreate": "2021-03-30T10:52:34.652Z",
-    "status": 1,
-    "project": 1,
-    "type": [
-      2
-    ]
+    "created": null,
+    "finished": null,
+    "name": "sdfg",
+    "description": "sdfg"
   }
 },
 {
@@ -173,79 +152,6 @@
 },
 {
   "model": "listapp.task",
-  "pk": 12,
-  "fields": {
-    "title": "asdf",
-    "description": "asdf",
-    "created": "2021-04-02T09:28:47.390Z",
-    "upgreate": "2021-04-02T09:28:47.390Z",
-    "status": 1,
-    "project": 15,
-    "type": [
-      2
-    ]
-  }
-},
-{
-  "model": "listapp.task",
-  "pk": 13,
-  "fields": {
-    "title": "sfdg",
-    "description": "sdfg",
-    "created": "2021-04-02T10:23:45.160Z",
-    "upgreate": "2021-04-02T10:23:45.160Z",
-    "status": 1,
-    "project": 1,
-    "type": []
-  }
-},
-{
-  "model": "listapp.task",
-  "pk": 14,
-  "fields": {
-    "title": "sdfg",
-    "description": "adfg",
-    "created": "2021-04-02T10:23:53.028Z",
-    "upgreate": "2021-04-02T10:23:53.028Z",
-    "status": 1,
-    "project": 1,
-    "type": [
-      2
-    ]
-  }
-},
-{
-  "model": "listapp.task",
-  "pk": 15,
-  "fields": {
-    "title": "asdf",
-    "description": "wef",
-    "created": "2021-04-02T10:25:20.868Z",
-    "upgreate": "2021-04-02T10:25:20.868Z",
-    "status": 1,
-    "project": 1,
-    "type": [
-      2
-    ]
-  }
-},
-{
-  "model": "listapp.task",
-  "pk": 16,
-  "fields": {
-    "title": "asdf",
-    "description": "we",
-    "created": "2021-04-02T10:25:29.478Z",
-    "upgreate": "2021-04-02T10:25:29.478Z",
-    "status": 1,
-    "project": 1,
-    "type": [
-      1
-    ]
-  }
-},
-{
-  "model": "listapp.task",
   "pk": 17,
   "fields": {
     "title": "asdfasdfsdf",
@@ -264,7 +170,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$216000$bvCWgIJ61Qfj$+cvX1Y1quHNXzGfxqEH0Zkqi5BE9/dhkq2iEzzp/1dU=",
-    "last_login": "2021-04-06T09:39:15.528Z",
+    "last_login": "2021-04-10T09:19:56.804Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -273,6 +179,24 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2021-03-29T09:50:14.750Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$216000$tH4xPG2dCQFC$/VNbdbJ1ZI3iFsw8lhJpdITqn5MrB1yAB8H9SQnvmy4=",
+    "last_login": "2021-04-10T10:41:12.667Z",
+    "is_superuser": false,
+    "username": "444",
+    "first_name": "fghf",
+    "last_name": "dddd",
+    "email": "ddd@cdscs.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2021-04-10T10:41:12.294Z",
     "groups": [],
     "user_permissions": []
   }

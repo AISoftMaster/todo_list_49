@@ -1,20 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required
-from  django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .forms import ProjectForm, TaskForm
-from .models import Task, Project, Type
+from .models import Task, Project
 
 
 # Create your views here.
-
-def index(request):
-    return render(request, "index.html")
-
 
 class TaskListview(ListView):
     template_name = "task_list.html"
@@ -51,48 +45,35 @@ class ProjectCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         project = form.save(commit=False)
         project.save()
-        return redirect('project_listview')
+        return redirect('project:listview')
 
 
-
-
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
     template_name = "project_form.html"
     model = Task
     form_class = TaskForm
 
     def form_valid(self, form):
-        print(form)
+        # print(form)
         project = Project.objects.get(pk=self.kwargs.get('pk'))
         task = form.save(commit=False)
         task.project = project
         task.save()
         form.save_m2m()
-
-        return redirect('project_detailview', pk=project.pk)
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+        return redirect('project:detailview', pk=project.pk)
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     template_name = 'project_form.html'
     form_class = ProjectForm
     context_key = 'project'
 
     def get_success_url(self):
-        return reverse('project_detailview', kwargs={'pk': self.object.pk})
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+        return reverse('project:detailview', kwargs={'pk': self.object.pk})
 
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     template_name = 'project_form.html'
     form_class = TaskForm
@@ -100,27 +81,17 @@ class TaskUpdateView(UpdateView):
     pk_url_kwarg = 'pk2'
 
     def get_success_url(self):
-        return reverse('task_detail', kwargs={'pk': self.object.project.pk, 'pk2': self.object.pk})
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+        return reverse('project:detail', kwargs={'pk': self.object.project.pk, 'pk2': self.object.pk})
 
 
-class ProjectDeleteView(DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
     template_name = 'project_delete.html'
     context_object_name = 'project'
-    success_url = reverse_lazy('project_listview')
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+    success_url = reverse_lazy('project:listview')
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     # template_name = 'task_delete.html'
     # context_object_name = 'task'
@@ -130,10 +101,5 @@ class TaskDeleteView(DeleteView):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('project_detailview', kwargs={'pk': self.object.project.pk})
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            return redirect('login')
-        return super().dispatch(request, *args, **kwargs)
+        return reverse('project:detailview', kwargs={'pk': self.object.project.pk})
 
