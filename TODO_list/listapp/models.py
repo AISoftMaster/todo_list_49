@@ -16,11 +16,18 @@ class Status(models.Model):
 # Create your models here.
 
 
+class ProjectUser(models.Model):
+    project = models.ForeignKey('listapp.project', related_name='project_users', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', related_name='user_projects', on_delete=models.CASCADE)
+
+
 class Project(models.Model):
     created = models.DateField()
     finished = models.DateField(null=True, blank=True)
     name = models.CharField(max_length=60)
     description = models.CharField(max_length=250)
+    users = models.ManyToManyField('auth.User', related_name='projects', through='listapp.ProjectUser',
+                                   through_fields=('project', 'user'), blank=True)
 
     def __str__(self):
         return self.name

@@ -17,7 +17,11 @@ Projects -
     <li>{{task.upgreate}}</li>
 
 </ul>
+{% if perms.listapp.change_task %}
 <h3><a href="{% url 'project:task_update' task.project.pk task.pk %}">Task update</a></h3>
+{% endif %}
+{% if perms.listapp.delete_task %}
 <h3><a href="{% url 'project:task_delete' task.project.pk task.pk %}">Task delete</a></h3>
+{% endif %}
 
 {% endblock content %}

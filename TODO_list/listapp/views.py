@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 from .forms import ProjectForm, TaskForm
@@ -37,21 +37,26 @@ class ProjectsDetailView(DetailView):
     template_name = "project_detailview.html"
 
 
-class ProjectCreate(LoginRequiredMixin, CreateView):
+class ProjectCreate(PermissionRequiredMixin, CreateView):
     template_name = "project_form.html"
     model = Project
     form_class = ProjectForm
+    permission_required = ('listapp.add_project',)
 
     def form_valid(self, form):
         project = form.save(commit=False)
         project.save()
         return redirect('project:listview')
 
+    def has_permission(self):
+        return super().has_permission() or self.get_object().author == self.request.user
 
-class TaskCreate(LoginRequiredMixin, CreateView):
+
+class TaskCreate(PermissionRequiredMixin, CreateView):
     template_name = "project_form.html"
     model = Task
     form_class = TaskForm
+    permission_required = ('listapp.add_task',)
 
     def form_valid(self, form):
         # print(form)
@@ -63,43 +68,46 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         return redirect('project:detailview', pk=project.pk)
 
 
-class ProjectUpdateView(LoginRequiredMixin, UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     model = Project
     template_name = 'project_form.html'
     form_class = ProjectForm
     context_key = 'project'
+    permission_required = ('listapp.change_project',)
 
     def get_success_url(self):
         return reverse('project:detailview', kwargs={'pk': self.object.pk})
 
 
-class TaskUpdateView(LoginRequiredMixin, UpdateView):
+class TaskUpdateView(PermissionRequiredMixin, UpdateView):
     model = Task
     template_name = 'project_form.html'
     form_class = TaskForm
     context_object_name = 'task'
     pk_url_kwarg = 'pk2'
+    permission_required = ('listapp.change_task',)
 
     def get_success_url(self):
         return reverse('project:detail', kwargs={'pk': self.object.project.pk, 'pk2': self.object.pk})
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     model = Project
     template_name = 'project_delete.html'
     context_object_name = 'project'
     success_url = reverse_lazy('project:listview')
+    permission_required = ('listapp.delete_project',)
 
 
-class TaskDeleteView(LoginRequiredMixin, DeleteView):
+class TaskDeleteView(PermissionRequiredMixin, DeleteView):
     model = Task
     # template_name = 'task_delete.html'
     # context_object_name = 'task'
     pk_url_kwarg = 'pk2'
+    permission_required = ('listapp.delete_task',)
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
         return reverse('project:detailview', kwargs={'pk': self.object.project.pk})
-

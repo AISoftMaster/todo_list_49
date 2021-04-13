@@ -12,8 +12,9 @@ Projects -
     <li>No project yet.</li>
 {% endfor %}
 </ul>
-
+{% if perms.listapp.add_project %}
 <h2><a href="{% url 'project:create' %}">Project_create</a></h2>
+{% endif %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}

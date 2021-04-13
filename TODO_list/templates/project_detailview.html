@@ -13,9 +13,14 @@ Projects -
     <li>No task yet.</li>
 {% endfor %}
 </ul>
-
+{% if perms.listapp.add_task %}
 <h3><a href="{% url 'project:create' project.pk %}">Task create</a></h3>
+{% endif %}
+{% if perms.listapp.change_project %}
 <h3><a href="{% url 'project:update' project.pk %}">Project update</a></h3>
+{% endif %}
+{% if perms.listapp.delete_project %}
 <h3><a href="{% url 'project:delete' project.pk %}">Project delete</a></h3>
+{% endif %}
 
 {% endblock content %}
