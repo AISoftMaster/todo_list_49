@@ -2,10 +2,8 @@ from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
-
 from .forms import ProjectForm, TaskForm
-from .models import Task, Project
+from .models import Task, Project, ProjectUser
 
 
 # Create your views here.
@@ -48,8 +46,8 @@ class ProjectCreate(PermissionRequiredMixin, CreateView):
         project.save()
         return redirect('project:listview')
 
-    def has_permission(self):
-        return super().has_permission() or self.get_object().author == self.request.user
+    # def has_permission(self):
+    #     return super().has_permission() or self.get_object().author == self.request.user
 
 
 class TaskCreate(PermissionRequiredMixin, CreateView):
@@ -111,3 +109,13 @@ class TaskDeleteView(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('project:detailview', kwargs={'pk': self.object.project.pk})
+
+
+class ProjectUsersDetail(PermissionRequiredMixin, DeleteView):
+    model = ProjectUser
+    context_object_name = 'users'
+    template_name = 'project_users.html'
+    permission_required = ('listapp.view_project_user',)
+
+    def get_context_object_name(self, obj):
+        project = Project

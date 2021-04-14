@@ -1,4 +1,6 @@
 from django.db import models
+from  django.conf import settings
+from django.contrib.auth import get_user_model
 
 
 class Type(models.Model):
@@ -26,6 +28,7 @@ class Project(models.Model):
     finished = models.DateField(null=True, blank=True)
     name = models.CharField(max_length=60)
     description = models.CharField(max_length=250)
+    # author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, related_name='projects')
     users = models.ManyToManyField('auth.User', related_name='projects', through='listapp.ProjectUser',
                                    through_fields=('project', 'user'), blank=True)
 
@@ -41,8 +44,7 @@ class Task(models.Model):
     type = models.ManyToManyField('listapp.Type', related_name="tasks", blank=True)
     status = models.ForeignKey('listapp.Status', on_delete=models.PROTECT, related_name="status")
     project = models.ForeignKey('listapp.Project', related_name='task_project', on_delete=models.CASCADE, verbose_name='проект')
+    # author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, related_name='tasks')
 
     def __str__(self):
         return self.title
-
-
