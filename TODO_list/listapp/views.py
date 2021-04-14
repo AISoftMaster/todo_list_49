@@ -1,9 +1,9 @@
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from .forms import ProjectForm, TaskForm
-from .models import Task, Project, ProjectUser
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from .forms import ProjectForm, TaskForm, ProjectUserForm
+from .models import Task, Project
 
 
 # Create your views here.
@@ -46,9 +46,6 @@ class ProjectCreate(PermissionRequiredMixin, CreateView):
         project.save()
         return redirect('project:listview')
 
-    # def has_permission(self):
-    #     return super().has_permission() or self.get_object().author == self.request.user
-
 
 class TaskCreate(PermissionRequiredMixin, CreateView):
     template_name = "project_form.html"
@@ -56,8 +53,10 @@ class TaskCreate(PermissionRequiredMixin, CreateView):
     form_class = TaskForm
     permission_required = ('listapp.add_task',)
 
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+
     def form_valid(self, form):
-        # print(form)
         project = Project.objects.get(pk=self.kwargs.get('pk'))
         task = form.save(commit=False)
         task.project = project
@@ -85,6 +84,9 @@ class TaskUpdateView(PermissionRequiredMixin, UpdateView):
     pk_url_kwarg = 'pk2'
     permission_required = ('listapp.change_task',)
 
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+
     def get_success_url(self):
         return reverse('project:detail', kwargs={'pk': self.object.project.pk, 'pk2': self.object.pk})
 
@@ -99,10 +101,11 @@ class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
 
 class TaskDeleteView(PermissionRequiredMixin, DeleteView):
     model = Task
-    # template_name = 'task_delete.html'
-    # context_object_name = 'task'
     pk_url_kwarg = 'pk2'
     permission_required = ('listapp.delete_task',)
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
@@ -111,11 +114,15 @@ class TaskDeleteView(PermissionRequiredMixin, DeleteView):
         return reverse('project:detailview', kwargs={'pk': self.object.project.pk})
 
 
-class ProjectUsersDetail(PermissionRequiredMixin, DeleteView):
-    model = ProjectUser
-    context_object_name = 'users'
+class ProjectUsersDetail(PermissionRequiredMixin, UpdateView):
+    model = Project
+    context_object_name = 'project'
     template_name = 'project_users.html'
-    permission_required = ('listapp.view_project_user',)
+    permission_required = ('listapp.can_add_user',)
+    form_class = ProjectUserForm
 
-    def get_context_object_name(self, obj):
-        project = Project
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().users.all()
+
+    def get_success_url(self):
+        return reverse('project:detailview', kwargs={'pk': self.object.pk})

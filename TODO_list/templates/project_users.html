@@ -3,7 +3,7 @@
 Project users
 {% endblock title %}
 {% block content %}
-{{users}}
-
-
+<form action="" method="post">
+    {% include 'partial/form.html' with button_text='create' %}
+</form>
 {% endblock content %}

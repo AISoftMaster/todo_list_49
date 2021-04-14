@@ -13,3 +13,6 @@ listapp/migrations/__pycache__/
 TODO_list/TODO_list/__pycache__/
 TODO_list/listapp/__pycache__/
 TODO_list/listapp/migrations/
+
+
+TODO_list/settings.py

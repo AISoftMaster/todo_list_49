@@ -35,6 +35,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        permissions = [('can_add_user', 'Может внести работника')]
+
 
 class Task(models.Model):
     title = models.CharField(max_length=350)
