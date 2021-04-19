@@ -28,7 +28,6 @@ class Project(models.Model):
     finished = models.DateField(null=True, blank=True)
     name = models.CharField(max_length=60)
     description = models.CharField(max_length=250)
-    # author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True, related_name='projects')
     users = models.ManyToManyField('auth.User', related_name='projects', through='listapp.ProjectUser',
                                    through_fields=('project', 'user'), blank=True)
 

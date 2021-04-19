@@ -27,8 +27,13 @@ Projects -
 {% endif %}
 
 <p>Сотрудники задействованные в проект</p>
-{% for user in project.users.all %}
-{{user.username}}   {{user.id}}
-{% endfor %}
+<ul>
+    {% for user in project.users.all %}
+    <li>
+        <a href="{% url 'accounts:profile' user.pk %}">{{user.username}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
 
 {% endblock content %}

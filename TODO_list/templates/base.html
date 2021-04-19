@@ -21,6 +21,10 @@
            <li class="menu-right"><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}"
                                      class="nav-link">Выход</a></li>
            <li class="menu-right">Привет, {{ user.username }}!</li>
+            <li class="menu-right"><a href="{% url 'accounts:profile' user.pk %}">Профайл</a></li>
+       {% if perms.accounts.can_view_userlist %}
+            <li class="menu-right"><a href="{% url 'accounts:list' %}">Все пользователи</a></li>
+       {% endif %}
        {% else %}
            <li class="menu-right">
                <a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}"
