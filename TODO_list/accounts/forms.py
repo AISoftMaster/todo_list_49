@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django import forms
+from django.forms.widgets import PasswordInput
+from django.contrib.auth import get_user_model
 
 
 class MyUserCreationForm(forms.ModelForm):
@@ -27,3 +29,36 @@ class MyUserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = {'username', 'first_name', 'last_name', 'email', 'password', 'password_confirm'}
+
+
+class UserChangePasswordForm(forms.ModelForm):
+    old_password = forms.CharField(required=True, label='Старый пароль', widget=PasswordInput)
+    new_password = forms.CharField(required=True, label='Новый пароль', widget=PasswordInput)
+    password_confirm = forms.CharField(required=True, label='Подтверждение пароля', widget=PasswordInput)
+
+    class Meta:
+        model = get_user_model()
+        fields = ('old_password', 'new_password', 'password_confirm')
+
+    def clean_password_confirm(self):
+        new_password = self.cleaned_data.get('new_password')
+        password_confirm = self.cleaned_data.get('password_confirm')
+
+        if new_password != password_confirm:
+            raise forms.ValidationError('Пароли не совпадают!')
+        return new_password
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data.get('old_password')
+
+        if not self.instance.check_password(old_password):
+            raise forms.ValidationError('Пароль введвен неверно')
+
+        return old_password
+
+    def save(self, commit=True):
+        user = self.instance
+        user.set_password(self.cleaned_data.get('new_password'))
+        if commit:
+            user.save()
+        return user

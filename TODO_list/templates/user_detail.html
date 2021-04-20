@@ -3,7 +3,7 @@
 Пользователь
 {% endblock title %}
 {% block content %}
-    <h1>Личная страница пользователя
+    <h1>Личная страница пользователя:
     {{user_obj.get_full_name|default:user_obj.username}}
     </h1>
 
@@ -17,7 +17,6 @@
     <li>Почта: {{user_obj.email}}</li>
 </ul>
 
-
 <h3>Мои проекты:</h3>
 <ul>
     {% for project in user_obj.projects.all %}
@@ -30,6 +29,6 @@
 
 <ul>
     <li><a href="#">Редактировать</a></li>
-    <li><a href="#">Смена пароля</a></li>
+    <li><a href="{% url 'accounts:change_password' user_obj.pk %}">Смена пароля</a></li>
 </ul>
 {% endblock content %}
