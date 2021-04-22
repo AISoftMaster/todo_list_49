@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms.widgets import PasswordInput
 from django.contrib.auth import get_user_model
+from accounts.models import Profile
 
 
 class MyUserCreationForm(forms.ModelForm):
@@ -62,3 +63,15 @@ class UserChangePasswordForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ('email', 'first_name', 'last_name')
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ('user',)

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}
+Редактировать профиль
+{% endblock title %}
+{% block content %}
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'partial/form.html' with fields_only=True %}
+        {% include 'partial/form.html' with form=profile_form fields_only=True %}
+        <button type="submit">change</button>
+    </form>
+{% endblock content %}
