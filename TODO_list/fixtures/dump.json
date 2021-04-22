@@ -223,6 +223,16 @@
   }
 },
 {
+  "model": "listapp.project",
+  "pk": 7,
+  "fields": {
+    "created": "2020-02-02",
+    "finished": null,
+    "name": "grre",
+    "description": "regregreg"
+  }
+},
+{
   "model": "listapp.task",
   "pk": 2,
   "fields": {
